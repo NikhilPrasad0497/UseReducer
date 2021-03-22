@@ -3,6 +3,9 @@
 import { useReducer} from 'react'
 import './App.css';
 
+const INCREMENT = "INCREMENT"
+const DECREMENT = "DECREMENT"
+
 function App() {
   // const recuderfunc = (state, value)=>{
   //   // console.log(`ha ha dikh rha hain, antenna pakde rahiye`, value, state.initialNum)
@@ -13,23 +16,23 @@ function App() {
   const counterReducer = (acc, dispatchValue)=> {
     // console.log(acc, dispatchValue)
     switch(dispatchValue.type){
-      case "INCREMENT":
+      case INCREMENT:
         return {...acc, counter:acc.counter+1}
-      case "DECREMENT":
-        return {...acc, counter:acc.counter+1}
+      case DECREMENT:
+        return {...acc, counter:acc.counter-1}
       default:
         console.log("code Broke")
         break
     }
     return state;
   }
-  const [ state, dispatch] = useReducer(()=> counterReducer,{ counter: 0})
+  const [ state, dispatch] = useReducer(counterReducer,{ counter: 0})
   return (
     <div className="App">
       <h1>Counter</h1>
       <div>Count: {state.counter}</div>
-      <button onClick={()=> dispatch({type: "INCREMENT"})}> + </button>
-      <button onClick={()=> dispatch({type: "DECREMENT"})}> - </button>
+      <button onClick={()=> dispatch({type: INCREMENT})}> + </button>
+      <button onClick={()=> dispatch({type: DECREMENT})}> - </button>
     </div>
   );
 }
